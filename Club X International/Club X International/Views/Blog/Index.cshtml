@@ -1,0 +1,60 @@
+﻿@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Blog";
+    var Blogs = ViewData["Blogs"] as PagedList.IPagedList<Club_X_International.Models.Blog>;
+}
+
+<main id="main">
+    <div class="Header BlogHeaderBg">
+        <video autoplay muted loop class="HeaderBgVideo">
+            <source src="~/Videos/Club x Intl InnerCity Tour.mp4" type="video/mp4" />
+            Your browser does not support HTML5 Video
+        </video>
+        <div class="overlay-wrapper"></div>
+        <div class="HeaderContent">
+        <h1 class="TitleHeader">Blog</h1>
+        <div class="TitleContent">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores consectetur harum ex inventore atque, quibusdam repellat
+            nulla eos eaque? Sit quam officiis earum placeat labore id soluta ex ea corrupti?
+        </div>
+            </div>
+    </div>
+
+    <div class="grid">
+        <section id="BlogSectionA" class="SectionA">
+            <div class="searchArea" style="text-align:center">
+                <div>Search by Title or Name: </div>
+                @using (Html.BeginForm("Index","Blog",FormMethod.Get))
+                {
+                    @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
+                    <button type="submit" id="searchBtn"><span class="fa fa-search"></span></button>
+                }
+            </div>
+            <div class="row">
+@foreach (var item in Blogs)
+{
+              <a href="@Url.Action("Details",new { title = item.Title, id = item.BlogID })" title="@Html.DisplayFor(modelItem => item.Title)">  <div class="col-lg-6 Blog">
+                  <div class="blogGrid">
+
+                   <div class="BlogPic"><img src="~/BlogImages/@Html.DisplayFor(modelItem => item.BlogPicture)" alt="@Html.DisplayFor(modelItem => item.Title)" class="blogImage"></div>
+                    <div class="BlogTitle">
+                        <h4>@Html.DisplayFor(modelItem => item.Title)</h4>
+                    </div>
+                  </div>
+                    <hr class="horiSlider">
+                    <div class="innerGrid">
+                        <div class="dateSection fa fa-calendar">@Html.DisplayFor(modelItem=>item.WrittenDate)</div>
+                        <div class="writerSection">@Html.DisplayFor(modelItem => item.writer.Name)</div>
+                    </div>
+                </div></a>
+}
+            </div>
+            <br />
+           <div style="text-align:center">Page @(Blogs.PageCount < Blogs.PageNumber ? 0 : Blogs.PageNumber) of @Blogs.PageCount
+            @Html.PagedListPager(Blogs, page => Url.Action("Index",new { page, currentFilter = ViewBag.CurrentFilter }))</div>
+        </section>
+        <section class="SectionB"></section>
+    </div>
+
+</main>

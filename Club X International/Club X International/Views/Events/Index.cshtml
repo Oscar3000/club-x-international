@@ -1,0 +1,58 @@
+﻿@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Events";
+    var Events = ViewData["Events"] as PagedList.IPagedList<Club_X_International.Models.Event>;
+}
+
+  <!--Main-->
+<main id="main">
+    <div class="Header EventHeaderBg">
+        <video autoplay muted loop class="HeaderBgVideo">
+            <source src="~/Videos/Special Moments at Epignosis City Invasion.mp4" type="video/mp4" />
+            Your browser does not support HTML5 Video
+        </video>
+        <div class="overlay-wrapper"></div>
+        <div class="HeaderContent">
+            <h1 class="TitleHeader">Event</h1>
+            <div class="TitleContent">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores consectetur harum ex inventore atque, quibusdam repellat
+                nulla eos eaque? Sit quam officiis earum placeat labore id soluta ex ea corrupti?
+            </div>
+        </div>
+    </div>
+    <div class="grid">
+        <section id="EventSectionA" class="SectionA">
+            <div class="searchArea">
+                <div>Search by Title or Name: </div>
+                @using (Html.BeginForm("Index", "Events", FormMethod.Get))
+                {
+                    @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
+                    <button type="submit" id="searchBtn"><span class="fa fa-search"></span></button>
+                }
+            </div>
+            <div class="row"> 
+@foreach (var item in Events)
+{
+                <div class="Event col-md-3">
+                    <img src="~/EventImages/@Html.DisplayFor(modelItem => item.EventPicture)" alt="Epignosis Ukraine" class="eventImage">
+                    <p>
+                        <span>Title</span>: @Html.DisplayFor(modelItem => item.Title)
+                    </p>
+                    <p>
+                        <span>Time</span>: @Html.DisplayFor(modelItem => item.EventTime)
+                    </p>
+                    <p>
+                        <span>Details</span>: @Html.DisplayFor(modelItem => item.EventDescription)
+                    </p>
+                </div>
+
+}
+            </div>
+            <br />
+          <div style="text-align:center"> Page @(Events.PageCount < Events.PageNumber ? 0:Events.PageNumber) of @Events.PageCount</div>
+            @Html.PagedListPager(Events,page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter}))
+        </section>
+        <section id="EventSectionB" class="SectionB"></section>
+    </div>
+</main>

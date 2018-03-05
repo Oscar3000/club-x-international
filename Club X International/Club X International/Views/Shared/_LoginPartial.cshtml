@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNet.Identity
+@{ 
+    var name = "Hello"+ " " + Session["FirstName"].ToString();
+}
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("Index", "LogOff", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="navbar-buttons mbr-section-btn">
+            <a class="btn btn-sm btn-white-outline display-4" href="#"><span class="mbri-user mbr-iconfont mbr-iconfont-btn"></span>@name</a>
+            <a class="btn btn-sm btn-white-outline display-4" href="javascript:document.getElementById('logoutForm').submit()"><span class="mbri-logout mbr-iconfont mbr-iconfont-btn"></span>Log off</a>
+           </div>
+    }
+}
+else
+{
+    <div class="navbar-buttons mbr-section-btn">
+        <a class="btn btn-sm btn-white-outline display-4" href='@Url.Action("Index","SignUp")'><span class="mbri-unlock mbr-iconfont mbr-iconfont-btn"></span>Register</a>
+        <button class="btn btn-sm btn-success-outline display-4" onclick="document.getElementById('id01').style.display='block'" style="margin:auto"><span class="mbri-login mbr-iconfont mbr-iconfont-btn"></span>Login</button>
+    </div>
+}
+

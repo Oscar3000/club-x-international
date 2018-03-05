@@ -1,0 +1,45 @@
+﻿@using Club_X_International.Models.ViewModels;
+@model ViewModels
+
+@{
+    ViewBag.Title = Html.DisplayFor(model=>model.Blog.Title);
+    var Blogs = ViewData["BlogByWriter"] as List<Club_X_International.Models.Blog>;
+}
+
+
+<main id="main">
+    <div class="grid Details">
+        <section id="BlogDetailSection" class="SectionA">
+            <h1 class="text-center">@Html.DisplayFor(model=>model.Blog.Title)</h1>
+            <hr />
+            <div class="innerGrid">
+                <div class="date fa fa-calendar">@Html.DisplayFor(model => model.Blog.WrittenDate)</div>
+                <div class="writer">@Html.DisplayFor(model => model.Blog.writer.Name)</div>
+            </div>
+            <hr />
+            <img src="~/BlogImages/@Html.DisplayFor(model=>model.Blog.BlogPicture)" alt="Blog's Pic" style="width:100%;max-height:600px">
+            <div class="BlogDetailsContent">@Html.Raw(HttpUtility.HtmlDecode(Model.Blog.BlogContent))</div>
+            <hr>
+            @*Comment Section*@
+            <div id="disqus_thread" style="padding:20px 40px"></div>
+        </section>
+        <section class="SectionB">
+            <h3 class="text-center">Blog</h3>
+            <hr />
+            
+                @foreach (var item in Blogs)
+                {
+                    <div class="container">
+                        <a href="@Url.Action("Details",new { title = item.Title, id = item.BlogID })" title="@Html.DisplayFor(modelItem => item.Title)">
+                            <div class="row no-gutters">
+                                <div class="col"><img src="~/BlogImages/@Html.DisplayFor(modelItem => item.BlogPicture)" alt="@Html.DisplayFor(modelItem => item.Title)" class="blogImage"> </div>
+                                <div class="col"><h4>@Html.DisplayFor(modelItem => item.Title)</h4></div>
+                            </div>
+                        </a>
+                    </div>
+                        <hr />
+                 }
+                    
+        </section>
+    </div>
+</main>

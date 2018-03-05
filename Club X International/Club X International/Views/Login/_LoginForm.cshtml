@@ -1,0 +1,62 @@
+﻿@*@model Club_X_International.Models.LoginViewModel*@
+
+@{ 
+    var model = new Club_X_International.Models.LoginViewModel();
+}
+
+<div id="id01" class="modal">
+                @using (Html.BeginForm("Index_Login", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "modal-content animate container", role = "form" }))
+            {
+                    <span onclick="document.getElementById('id01').style.display='none'"
+                          class="close" title="Close">&times;</span>
+                    @Html.AntiForgeryToken()
+                    <h4 class="text-center" style="padding: 20px 49px 10px 49px">Use a local account to log in.</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => @model.Email, new { @class = "control-label" })
+                        <div>
+                            @Html.TextBoxFor(m => @model.Email, new { @placeholder ="Enter Email" })
+                            @Html.ValidationMessageFor(m => @model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => @model.Password, new { @class = "control-label" })
+                        <div>
+                            @Html.PasswordFor(m => @model.Password, new {@placeholder="Enter Password" })
+                            @Html.ValidationMessageFor(m => @model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(m => @model.RememberMe)
+                                @Html.LabelFor(m => @model.RememberMe)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <button type="submit" class="LoginButton">Log in</button>
+                        </div>
+                    </div>
+                    <button class="btnRegistar">
+                        @Html.ActionLink("Register as a new user", "Index", "SignUp")
+                    </button>
+                    @* Enable this once you have account confirmation enabled for password reset functionality
+                        <p>
+                            @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                        </p>*@
+                    <div style="background-color:#f1f1f1">
+                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                        <span class="psw">@Html.ActionLink("Forgot your password?", "ForgotPassword", "ForgotPassword")</span>
+                    </div>
+                }
+
+           
+</div>
+        @*<div class="col-md-4">
+                <section id="socialLoginForm">
+                    @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                </section>
+            </div>*@

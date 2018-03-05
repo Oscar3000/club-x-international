@@ -1,0 +1,14 @@
+/Club X International/Club X International/bin
+/Club X International/Club X International/obj
+/Club X International/.vs/Club X International/v14/*.suo
+/Club X International/Club X International/*user
+/Club X International/.vs/config
+
+/Club X International/packages
+
+# User-specific files
+*.suo
+*.user
+
+/Club X International/Club X International/.Connections.config
+/Club X International/Club X International/.Settings.config

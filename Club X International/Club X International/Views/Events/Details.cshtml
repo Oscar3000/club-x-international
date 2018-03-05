@@ -1,0 +1,50 @@
+﻿@using Club_X_International.Models.ViewModels;
+@model ViewModels
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Event</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Event.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Event.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Event.EventTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Event.EventTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Event.EventPicture)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Event.EventPicture)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Event.EventDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Event.EventDescription)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Event.EventID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

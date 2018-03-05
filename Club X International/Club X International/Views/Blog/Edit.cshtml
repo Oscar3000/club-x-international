@@ -1,0 +1,87 @@
+﻿@model Club_X_International.Models.Blog
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<div class="container" style="background-color:white">
+    <form role="form" enctype="multipart/form-data" method="post" id="myForm" class="mt-5">
+        @Html.AntiForgeryToken()
+
+        <h4 class="text-center p-4">Blog</h4>
+        <hr />
+        @Html.ValidationMessage("CustomErrors", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.BlogID, htmlAttributes: new { @id = "editBlogID" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", @id = "editTitle" } })
+            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BlogPicture, htmlAttributes: new { @class = "control-label" })
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Click To Upload</button>
+            <!--Modal-->
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-dialog-centered">
+                    <!--Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="file" name="PostedPicture" id="picture" />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End of Modal-->
+            @Html.ValidationMessageFor(model => model.BlogPicture, "Make sure the Image is less than 4MB", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BlogContent, htmlAttributes: new { @class = "control-label" })
+            @Html.TextAreaFor(model => model.BlogContent, new { @class = "form-control", @cols = "40", @rows = "6", @id = "editor" })
+            @Html.ValidationMessageFor(model => model.BlogContent, "", new { @class = "text-danger" })
+        </div>
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @id = "EditName" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>*@
+
+        <div class="form-group text-center">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" id="editSubmit" class="btn btn-success" />
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<div class="text-center">
+    @Html.ActionLink("Back to List", "Index", "", new { @class = "btn btn-outline-info" })
+</div>
+
+
+@*For Loading Image*@
+<div class="modal" id="LoadingImg">
+    <div class="Bg"></div>
+    <div class="loader text-center">
+        <i class="fa fa-cog fa-spin fa-5x" aria-hidden="true"></i>
+    </div>
+</div>
+
+
+<script>
+    CKEDITOR.replace('editor');
+</script>
+
+

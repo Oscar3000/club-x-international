@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Error";
+}
+
+<h2 style="padding-top:100px" class="text-center">Error</h2>
+
+<div class="text-center">
+    <p>
+        Sorry, the Password reset link has expired. @Html.ActionLink("Click here to get another", "ResendToken", new { Email = ViewBag.Email })
+    </p>
+</div>
+
